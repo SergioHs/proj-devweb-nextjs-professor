@@ -1,25 +1,46 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { CartContext } from '@/app/contexts/CartContext';
+import Appbar from '@/app/components/Appbar';
+import Bottom from '@/app/components/Bottom';
+import Drawer from '@/app/components/Drawer';
+import {
+  CartItemContainer,
+  CartItemImage,
+  CartItemTitle,
+  CartItemPrice,
+  RemoveFromCartButton,
+} from '@/app/styles/CartPage';
+import 'tailwindcss/tailwind.css';
 
 const CartPage = () => {
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const handleMenuToggle = () => {
+    setIsDrawerOpen(!isDrawerOpen);
+  };
+
+  
   const { cartItems, removeFromCart } = useContext(CartContext);
 
   return (
     <div>
-      <h1>Cart</h1>
+      <Appbar onMenuToggle={handleMenuToggle}></Appbar>
+      <Drawer isOpen={isDrawerOpen} onClose={handleMenuToggle}></Drawer>
       <ul>
         {cartItems.map((item) => (
           <li key={item.id}>
-            <div>
-              <img src={item.image} alt={item.title} />
-              <p>{item.title}</p>
-              <p>Price: {item.price}</p>
+            <CartItemContainer>
+              <CartItemImage src={item.image} alt={item.title} />
+              <CartItemTitle>{item.title}</CartItemTitle>
+              <CartItemPrice>Price: {item.price}</CartItemPrice>
               <p>Quantity: {item.quantity}</p>
-              <button onClick={() => removeFromCart(item.id)}>Remove from Cart</button>
-            </div>
+              <RemoveFromCartButton onClick={() => removeFromCart(item.id)}>
+                Remove from Cart
+              </RemoveFromCartButton>
+            </CartItemContainer>
           </li>
         ))}
       </ul>
+      <Bottom></Bottom>
     </div>
   );
 };

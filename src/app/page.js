@@ -2,6 +2,10 @@
 import Appbar from './components/Appbar';
 import Bottom from './components/Bottom';
 import Drawer from './components/Drawer';
+import Banner from './components/Banner';
+import CategoriesSection from './components/CategoriesSection';
+import TestimonialsSection from './components/TestimonialsSection';
+import HistorySection from './components/HistorySection';
 import React, {useState} from 'react';
 import { useRouter } from "next/navigation";
 
@@ -17,13 +21,10 @@ export default function Home() {
     <main className="min-h-screen">
       <Appbar onMenuToggle={handleMenuToggle}></Appbar>
       <Drawer isOpen={isDrawerOpen} onClose={handleMenuToggle}></Drawer>
-          <button
-            className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full'
-            onClick={() => router.push("/login")}
-          >
-            {" "}
-            Login
-          </button>
+      <Banner />
+      <CategoriesSection />
+      <TestimonialsSection />
+      <HistorySection />
       <Bottom></Bottom>
     </main>
   )
