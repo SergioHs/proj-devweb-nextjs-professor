@@ -11,9 +11,13 @@ import {
   RemoveFromCartButton,
 } from '@/app/styles/CartPage';
 import 'tailwindcss/tailwind.css';
+import { ThemeProvider } from '@/app/contexts/ThemeContext';  // Importando o ThemeProvider
+
 
 const CartPage = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const { theme } = useContext(ThemeContext);
+
   const handleMenuToggle = () => {
     setIsDrawerOpen(!isDrawerOpen);
   };
@@ -22,7 +26,7 @@ const CartPage = () => {
   const { cartItems, removeFromCart } = useContext(CartContext);
 
   return (
-    <div>
+    <div className={`app-container ${theme ? 'dark' : 'light'}`}>  {/* Aplicando o tema à div principal */}
       <Appbar onMenuToggle={handleMenuToggle}></Appbar>
       <Drawer isOpen={isDrawerOpen} onClose={handleMenuToggle}></Drawer>
       <ul>

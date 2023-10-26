@@ -1,21 +1,44 @@
+import React, { useContext } from 'react';
+import { ThemeContext } from '@/app/contexts/ThemeContext';
+
 const Drawer = ({ isOpen, onClose }) => {
+    const { theme, toggleTheme } = useContext(ThemeContext);
+
     const drawerStyle = {
-        transform: isOpen ? 'translateX(0%)' : 'translateX(-100%)',
-    }
+      transform: isOpen ? 'translateX(0%)' : 'translateX(-100%)',
+    };
 
-    return(
-    <div
-        className="fixed top-0 left-0 h-full w-64 bg-white text-white p-4"
-        style={drawerStyle}
-    >
+    console.log("Drawer:" + theme)
 
-        <h5 id="drawer-navigation-label" className="text-base font-semibold text-gray-500 uppercase dark:text-gray-400">Menu</h5>
-            <button onClick={onClose} type="button" data-drawer-hide="drawer-navigation" aria-controls="drawer-navigation" className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 right-2.5 inline-flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white" >
-            <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-            </svg>
-            <span className="sr-only">Close menu</span>
-        </button>
+return(
+    <div 
+    className={`fixed top-0 left-0 h-full w-64 p-4 ${theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-white text-black'}`} 
+    style={drawerStyle}>
+    
+    
+    <label className="relative inline-flex items-center cursor-pointer">
+      <input type="checkbox" 
+      value="" 
+      className="sr-only peer" 
+      onClick={toggleTheme} 
+      checked={theme === 'dark'}
+     />
+
+      <div 
+        className={`w-11 h-6 ${theme === 'dark' ? 'bg-gray-700 peer-checked:bg-blue-600' : 
+        'bg-gray-200 peer-checked:bg-white'} peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600`}></div>
+      
+      <span 
+        className="ml-3 text-sm font-medium">{theme === 'dark' ? 'Tema Escuro' : 'Tema Claro'}</span>
+    </label>
+
+    <button onClick={onClose} type="button" data-drawer-hide="drawer-navigation" aria-controls="drawer-navigation" className={`text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 right-2.5 inline-flex items-center justify-center ${theme === 'dark' ? 'dark:hover:bg-gray-600 dark:hover:text-white' : ''}`} >
+      <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+        <path stroke={theme === 'dark' ? 'white' : 'currentColor'} strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+      </svg>
+      <span className="sr-only">Fechar menu</span>
+    </button>
+
         <div className="py-4 overflow-y-auto">
             <ul className="space-y-2 font-medium">
                 <li>

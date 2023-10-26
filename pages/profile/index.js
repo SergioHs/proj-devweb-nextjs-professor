@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import React, {useState} from 'react';
 import 'tailwindcss/tailwind.css'
 
-const LoginPage = () => {
+const ProfilePage = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState();
 
   const handleMenuToggle  = () => {
@@ -68,4 +68,4 @@ const LoginPage = () => {
 
 
 }
-export default LoginPage;
+export default ProfilePage;
