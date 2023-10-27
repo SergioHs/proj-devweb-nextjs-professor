@@ -30,7 +30,7 @@ export default function Home() {
     <main className="min-h-screen">
       <Appbar onMenuToggle={handleMenuToggle}></Appbar>
       <Drawer isOpen={isDrawerOpen} onClose={handleMenuToggle}></Drawer>
-      <div className='w-full flex justify-content py-8'>
+      <div className="w-full flex justify-center py-8">
         <input 
           type='text'
           placeholder='Buscar produtos'
@@ -52,7 +52,6 @@ export default function Home() {
             ))}
         </ul>
       </div>
-      <Bottom></Bottom>
     </main>
   )
 }

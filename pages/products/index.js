@@ -51,7 +51,6 @@ const ProductsPage = () => {
           ))}
         </ul>
       </div>
-      <Bottom></Bottom>
     </main>
   );
 };

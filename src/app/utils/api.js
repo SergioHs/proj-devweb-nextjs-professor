@@ -19,5 +19,23 @@ const searchProducts = async (searchTerm) => {
           return [];
       }
   };
-export { fetchProducts, searchProducts };
+
+const createProduct = async (data) => {
+  try {
+    const response = await fetch('http://localhost:3000/products', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data),
+    })
+    return response.ok;
+    
+  } catch (error) {
+    console.error('Erro ao criar o produto: ', error)
+    return false;
+  }
+}
+
+export { fetchProducts, searchProducts, createProduct };
   
